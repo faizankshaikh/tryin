@@ -475,17 +475,6 @@ array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
         True,  True,  True,  True,  True,  True,  True,  True,  True,
         True,  True,  True,  True,  True,  True,  True,  True,  True,
         True,  True,  True,  True,  True,  True,  True,  True], dtype=bool)
->>> classification_report(test_y, clf_test_predict)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'classification_report' is not defined
->>> from sklearn.metrics import classification_report
->>> classification_report(test_y, clf_test_predict)
-/home/faizy/anaconda/lib/python2.7/site-packages/sklearn/metrics/classification.py:958: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-'             precision    recall  f1-score   support\n\n          0       0.95      1.00      0.97       682\n          1       0.00      0.00      0.00        37\n\navg / total       0.90      0.95      0.92       719\n'
->>> classification_report(test_y, clf_test_predict)
-'             precision    recall  f1-score   support\n\n          0       0.95      1.00      0.97       682\n          1       0.00      0.00      0.00        37\n\navg / total       0.90      0.95      0.92       719\n'
 >>> print(classification_report(test_y, clf_test_predict))
              precision    recall  f1-score   support
 
