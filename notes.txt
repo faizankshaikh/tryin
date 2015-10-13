@@ -1,3 +1,4 @@
+// Timestamp : 12 Oct
 >>> train_age.count()
 ID     3594
 AGE    3594
@@ -138,3 +139,362 @@ min      4.576511      0.472390
 max    152.662243      9.467301  
 
 [8 rows x 27 columns]
+
+// Timestamp : Tue Oct 13 10:49:51 IST 2015
+
+>>> import pandas as pd
+>>> train_age = pd.read_csv('Training_Dataset/id_age_train.csv')
+>>> train_label = pd.read_csv('Training_Dataset/id_label_train.csv')
+>>> train_labs = pd.read_csv('Training_Dataset/id_time_labs_train.csv')
+>>> train_vitals = pd.read_csv('Training_Dataset/id_time_vitals_train.csv')
+>>> 
+>>> train_age.count()
+ID     3594
+AGE    3594
+dtype: int64
+>>> train_label.count()
+ID       3594
+LABEL    3594
+dtype: int64
+>>> train_labs.count()
+ID      628437
+TIME    628437
+L1       12471
+L2       12790
+L3       12831
+L4       32719
+L5       35741
+L6       12961
+L7       29993
+L8       30131
+L9       26986
+L10      29835
+L11      26593
+L12      11119
+L13         41
+L14       1214
+L15       1968
+L16       4709
+L17        104
+L18     106199
+L19       1484
+L20       6330
+L21      13184
+L22      10879
+L23       5775
+L24        459
+L25      16990
+dtype: int64
+>>> train_vitals.count()
+ID      628437
+TIME    628437
+V1      423137
+V2      423038
+V3      455161
+V4      430491
+V5      435631
+V6      157943
+ICU     628437
+dtype: int64
+>>> 
+>>> train_age.head()
+   ID  AGE
+0   1   42
+1   2   81
+2   3   52
+3   4   82
+4   5   56
+>>> train_vitals.head()
+   ID  TIME   V1  V2   V3  V4   V5    V6  ICU
+0   1     0   86  49   70 NaN   87   NaN    0
+1   1  4320  NaN NaN   70 NaN  NaN   NaN    0
+2   1  5646   91  58  NaN NaN  NaN  96.6    1
+3   1  5703  140  73   91  32  NaN   NaN    1
+4   1  6342  139  90  107  29  101   NaN    1
+>>> train_labs.head()
+   ID  TIME       L1          L2          L3  L4  L5         L6  L7  L8 ...   \
+0   1     0      NaN         NaN         NaN NaN NaN        NaN NaN NaN ...    
+1   1  4320  6.60759  114.044116  128.393872 NaN NaN  11.327002 NaN NaN ...    
+2   1  5646      NaN         NaN         NaN NaN NaN        NaN NaN NaN ...    
+3   1  5703      NaN         NaN         NaN NaN NaN        NaN NaN NaN ...    
+4   1  6342      NaN         NaN         NaN NaN NaN        NaN NaN NaN ...    
+
+   L16  L17  L18  L19         L20  L21  L22  L23  L24  L25  
+0  NaN  NaN  NaN  NaN         NaN  NaN  NaN  NaN  NaN  NaN  
+1  NaN  NaN  NaN  NaN  100.206288  NaN  NaN  NaN  NaN  NaN  
+2  NaN  NaN  NaN  NaN         NaN  NaN  NaN  NaN  NaN  NaN  
+3  NaN  NaN  NaN  NaN         NaN  NaN  NaN  NaN  NaN  NaN  
+4  NaN  NaN  NaN  NaN         NaN  NaN  NaN  NaN  NaN  NaN  
+
+[5 rows x 27 columns]
+>>> train_label.head()
+   ID  LABEL
+0   1      1
+1   2      1
+2   3      1
+3   4      1
+4   5      1
+>>> train_age.describe()
+                ID          AGE
+count  3594.000000  3594.000000
+mean   1797.500000    61.035615
+std    1037.642761    16.240670
+min       1.000000    17.000000
+25%     899.250000    51.000000
+50%    1797.500000    62.500000
+75%    2695.750000    73.000000
+max    3594.000000   102.000000
+>>> train_label.describe()
+                ID        LABEL
+count  3594.000000  3594.000000
+mean   1797.500000     0.068169
+std    1037.642761     0.252071
+min       1.000000     0.000000
+25%     899.250000     0.000000
+50%    1797.500000     0.000000
+75%    2695.750000     0.000000
+max    3594.000000     1.000000
+>>> train_labs.describe()
+                  ID             TIME            L1            L2  \
+count  628437.000000    628437.000000  12471.000000  12790.000000   
+mean     1727.806905   1022408.279161      7.367832     43.743643   
+std      1029.031829   2756239.769567      0.175258     13.944959   
+min         1.000000         0.000000      4.988002      3.721489   
+25%       880.000000    130786.000000      7.327261     35.665611   
+50%      1700.000000    362109.000000      7.394237     41.081484   
+75%      2574.000000    840985.000000      7.446153     48.364848   
+max      3594.000000  35236735.000000      8.005289    189.360909   
+
+                 L3            L4            L5            L6            L7  \
+count  12831.000000  32719.000000  35741.000000  12961.000000  29993.000000   
+mean     121.660822    137.729164      4.053076     25.617869     34.883442   
+std       98.684027      8.075038      1.593761      6.585142    281.082526   
+min        1.664585      9.486680      1.268299      1.689828      0.000316   
+25%       64.342755    135.271148      3.633376     21.885013     12.562611   
+50%       88.028563    137.691213      3.934748     25.363115     21.460484   
+75%      136.208651    140.738306      4.305161     28.901669     37.802932   
+max      663.887361    207.631022     86.421800     62.043623  19955.356906   
+
+                 L8      ...               L16         L17            L18  \
+count  30131.000000      ...       4709.000000  104.000000  106199.000000   
+mean       1.908826      ...          5.001076    0.389833     148.042571   
+std        7.565800      ...         16.321316    0.863268      64.552796   
+min        0.000020      ...          0.000006    0.001560       0.836616   
+25%        0.776694      ...          0.412026    0.037078     108.349687   
+50%        1.117158      ...          1.158563    0.090076     133.618879   
+75%        1.773374      ...          1.999167    0.243048     169.937987   
+max      421.380554      ...        247.274994    5.446281    1599.362336   
+
+               L19          L20           L21           L22          L23  \
+count  1484.000000  6330.000000  13184.000000  10879.000000  5775.000000   
+mean    157.473835    56.574676      2.870504     98.839073    64.684401   
+std     101.043706    37.452660      0.727223     85.612224   239.627887   
+min      26.316843     0.040405      0.370731      7.517904     0.011292   
+25%     103.137418    39.169071      2.365462     54.592639     9.515925   
+50%     127.476700    47.392690      2.868213     74.487025    21.711902   
+75%     171.719551    78.223714      3.353787    109.278780    43.381763   
+max     857.331644  2052.670599      5.474665   1148.881186  5753.587777   
+
+              L24           L25  
+count  459.000000  16990.000000  
+mean    37.891432      1.970802  
+std     14.476386      0.374106  
+min      4.576511      0.472390  
+25%     29.202813      1.733649  
+50%     35.559688      1.934255  
+75%     44.583554      2.171182  
+max    152.662243      9.467301  
+
+[8 rows x 27 columns]
+>>> train_vitals.describe()
+                  ID             TIME             V1             V2  \
+count  628437.000000    628437.000000  423137.000000  423038.000000   
+mean     1727.806905   1022408.279161     122.710737      69.210043   
+std      1029.031829   2756239.769567      23.069533      15.151000   
+min         1.000000         0.000000       1.000000       1.000000   
+25%       880.000000    130786.000000     106.000000      59.000000   
+50%      1700.000000    362109.000000     120.000000      68.000000   
+75%      2574.000000    840985.000000     137.000000      78.000000   
+max      3594.000000  35236735.000000     290.000000     200.000000   
+
+                  V3             V4             V5             V6  \
+count  455161.000000  430491.000000  435631.000000  157943.000000   
+mean       86.815320      20.426097      97.666431      98.242680   
+std        18.974359       6.011689       3.722011       1.234502   
+min         1.000000       1.000000       0.000000      79.900000   
+25%        73.000000      17.000000      96.000000      97.600000   
+50%        85.000000      20.000000      98.000000      98.200000   
+75%        98.000000      23.000000     100.000000      98.800000   
+max       219.000000      82.000000     102.000000     108.200000   
+
+                 ICU  
+count  628437.000000  
+mean        0.810113  
+std         0.392212  
+min         0.000000  
+25%         1.000000  
+50%         1.000000  
+75%         1.000000  
+max         1.000000  
+
+>>> from sklearn.svm import SVC
+>>> clf = SVC(kernel = "sigmoid")
+>>> from sklearn import metrics
+>>> from sklearn.cross_validation import train_test_split
+>>> train_x_all = train_age_label[['ID', 'AGE']].values
+>>> train_y_all = train_age_label.LABEL.values
+
+>>> train_x, test_x, train_y, test_y = train_test_split(train_x_all, train_y_all, test_size = 0.20, random_state=0)
+>>> train_x
+array([[ 869,   38],
+       [1915,   78],
+       [2825,   58],
+       ..., 
+       [1654,   44],
+       [2608,   49],
+       [2733,   90]])
+>>> train_y
+array([0, 0, 0, ..., 0, 0, 0])
+>>> train_x.shape
+(2875, 2)
+>>> test_x.shape
+(719, 2)
+>>> clf = clf.fit(train_x, train_y)
+>>> clf_test_predict = clf.predict(test_x)
+>>> clf_test_predict
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0])
+>>> clf_test_predict == test_y
+array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+       False, False,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+        True,  True, False,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True, False,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True, False,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True, False,  True, False,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+       False,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True, False,  True,  True,  True,
+       False,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True, False, False,  True,  True, False,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True, False,
+        True, False,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True, False,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True, False,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True, False, False,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True, False,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True, False,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True, False,  True,  True, False,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+        True,  True, False,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True, False,  True,  True, False,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+       False,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True, False,  True,  True,
+       False,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True, False,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True,  True], dtype=bool)
+>>> classification_report(test_y, clf_test_predict)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'classification_report' is not defined
+>>> from sklearn.metrics import classification_report
+>>> classification_report(test_y, clf_test_predict)
+/home/faizy/anaconda/lib/python2.7/site-packages/sklearn/metrics/classification.py:958: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+'             precision    recall  f1-score   support\n\n          0       0.95      1.00      0.97       682\n          1       0.00      0.00      0.00        37\n\navg / total       0.90      0.95      0.92       719\n'
+>>> classification_report(test_y, clf_test_predict)
+'             precision    recall  f1-score   support\n\n          0       0.95      1.00      0.97       682\n          1       0.00      0.00      0.00        37\n\navg / total       0.90      0.95      0.92       719\n'
+>>> print(classification_report(test_y, clf_test_predict))
+             precision    recall  f1-score   support
+
+          0       0.95      1.00      0.97       682
+          1       0.00      0.00      0.00        37
+
+avg / total       0.90      0.95      0.92       719
+
+>>> from sklearn.metrics import accuracy_score
+>>> print(accuracy_score(test_y, clf_test_predict))
+0.948539638387
+
