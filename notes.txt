@@ -339,7 +339,7 @@ max         1.000000
 
 >>> from sklearn.svm import SVC
 >>> clf = SVC(kernel = "sigmoid")
->>> from sklearn import metrics
+>>> from sklearn import metrics 
 >>> from sklearn.cross_validation import train_test_split
 >>> train_x_all = train_age_label[['ID', 'AGE']].values
 >>> train_y_all = train_age_label.LABEL.values
@@ -487,3 +487,59 @@ avg / total       0.90      0.95      0.92       719
 >>> print(accuracy_score(test_y, clf_test_predict))
 0.948539638387
 
+>>> import pandas as pd
+>>> train_age = pd.read_csv('Training_Dataset/id_age_train.csv')
+>>> train_label = pd.read_csv('Training_Dataset/id_label_train.csv')
+>>> train_labs = pd.read_csv('Training_Dataset/id_time_labs_train.csv')
+>>> train_vitals = pd.read_csv('Training_Dataset/id_time_vitals_train.csv')
+>>> from sklearn.svm import SVC
+>>> train_age_label = pd.DataFrame.merge(train_age, train_label, on="ID")
+>>> train_x_all = train_age_label[['ID', 'AGE']].values
+>>> train_y_all = train_age_label.LABEL.values
+>>> from sklearn.cross_validation import train_test_split
+>>> train_x, test_x, train_y, test_y = train_test_split(train_x_all, train_y_all, test_size = 0.33, random_state=0)
+>>> clf = SVC(kernel = "sigmoid")>>> clf = clf.fit(train_x, train_y)
+>>> test_predict = clf.predict(test_x)
+>>> test_predict
+array([0, 0, 0, ..., 0, 0, 0])
+>>> from sklearn.metrics import accuracy_score
+>>> print(accuracy_score(test_y, test_predict))
+0.937657961247
+>>> test_predict.shape
+(1187,)
+>>> import numpy as np
+>>> arr = np.ones
+>>> arr
+<function ones at 0x7fdcf4bb58c0>
+>>> help(np.ones)
+
+>>> arr = np.ones(1187)
+>>> arr.shape
+(1187,)
+>>> print(accuracy_score(test_y, arr))
+0.0623420387532
+>>> arr = np.zeros(1187)
+>>> print(accuracy_score(test_y, arr))
+0.937657961247
+>>> 
+>>> from sklearn.neighbors import KNeighborsClassifier
+>>> nn = KNeighborsClassifier(n_neighbors = 3)
+>>> _nn = nn.fit(train_x, train_y)
+>>> _nn.predict(test_x)
+array([0, 0, 0, ..., 0, 0, 1])
+>>> n_predict = _nn.predict(test_x)
+>>> print(accuracy_score(test_y, n_predict))
+0.996630160067
+>>> 
+>>> from sklearn.ensemble import AdaBoostClassifier
+>>> clf = AdaBoostClassifier(n_estimators = 100)
+>>> clf.fit(train_x, train_y)
+AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=100, random_state=None)
+>>> _clf = clf.fit(train_x, train_y)
+>>> from sklearn.cross_validation import cross_val_score
+>>> scores = cross_val_score(clf, train_x, train_y)
+>>> scores.mean()
+0.99501453920201577
+>>> scores
+array([ 0.99501868,  0.99875312,  0.99127182])
