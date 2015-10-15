@@ -66,6 +66,15 @@ def preprocess(train_vitals, train_labs, train_age):
     print train_age.describe()
     """
     
+    """
+    /*
+train_labs_equi = pd.DataFrame(train_labs[train_labs.ID == 1].mean())
+for i in range(2, 3594):
+    train_labs_equi = pd.concat([train_labs_equi, train_labs[train_labs.ID == i].mean()], axis = 1)
+    
+train_labs.equi = train_labs.equi.T
+*/
+    """    
     return None
 
 def main():
