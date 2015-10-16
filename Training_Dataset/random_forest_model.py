@@ -1,44 +1,14 @@
 __author__ = 'jalFaizy, ashishmokalkar79, mybestthings'
 
-import csv
+# import csv
+# import os
 import sys
-import os
+import numpy as np
 import pandas as pd
 import sklearn as sk
-from sklearn.metrics import accuracy_score
-
-"""
-print "FILES"
-print first_csv_files;
-print second_csv_file;
-print third_csv_file;
-print fourth_csv_file;
-
-print "FILE: ID_AGE_test "
-with open('id_age_test.csv', 'rb') as f:
-    reader = csv.reader(f)
-    for row in reader:
-        print row
-
-print "FILE: ID_LABEL_test "
-
-with open('id_label_test.csv', 'rb') as f:
-    reader = csv.reader(f)
-    for row in reader:
-        print row
-print "FILE: ID_TIME_LABS_test "
-
-with open('id_time_labs_test.csv', 'rb') as f:
-    reader = csv.reader(f)
-    for row in reader:
-        print row
-print "FILES: ID_TIME_VITALS_test"
-
-with open('id_time_vitals_test.csv', 'rb') as f:
-    reader = csv.reader(f)
-    for row in reader:
-        print row
-"""
+from sklearn.metrics import accuracy_score as ac
+from sklearn.cross_validation import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 
 def read_args(vitals_test, labs_test, age_test):
     """ 
@@ -79,13 +49,35 @@ test_labs.equi = test_labs.equi.T
     """    
     return None
 
+def trainer():
+    train_age = pd.read_csv('id_age_train.csv')
+    train_label = pd.read_csv('id_label_train.csv')
+    train_labs = pd.read_csv('id_time_labs_train.csv')
+    train_vitals = pd.read_csv('id_time_vitals_train.csv')
+    
+    # train_labs_vitals = pd.DataFrame.merge(train_vitals, train_labs, on='ID')
+    # train_age_labs_vitals = pd.DataFrame.merge(train_age_labs, train_vitals, on='ID')
+    
+    train_all = pd.concat([train_age, train_labs, train_vitals, train_label], axis = 1)
+    
+    train_all = train_all.fillna(value = 0)
+    
+    print train_all.head()
+    '''
+    nn = KNeighborsClassifier(n_neighbors = 3)
+    _nn = nn.fit(train_x, train_y)
+    prediction = _nn.predict(test_x)
+    
+    print ac(test_y, prediction)
+    '''
+
 def main():
     first_csv_file=sys.argv[1];
     second_csv_file=sys.argv[2];
     third_csv_file=sys.argv[3];
-    # fourth_csv_file=sys.argv[4];
     
-    test_vitals, test_labs, test_age = read_args(first_csv_file, second_csv_file, third_csv_file)
-    test_all = preprocess(test_vitals, test_labs, test_age)
+    # test_vitals, test_labs, test_age = read_args(first_csv_file, second_csv_file, third_csv_file)
+    # test_all = preprocess(test_vitals, test_labs, test_age)
+    trainer()
 
 main()
