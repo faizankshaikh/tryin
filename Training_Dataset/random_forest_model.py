@@ -5,11 +5,13 @@ __author__ = 'jalFaizy, ashishmokalkar79, mybestthings'
 import sys
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score as ac
 from sklearn.cross_validation import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
 
 def read_args(vitals_test, labs_test, age_test):
     """ 
@@ -105,7 +107,21 @@ def trainer():
     prediction = clf.predict(test_x)
     # 99.99
     """
+
+    clf = ExtraTreesClassifier()
+    train_new = clf.fit(train_x, train_y).transform(train_x)
     
+    importances = clf.feature_importances_
+    std = np.std([tree.feature_importances_ for tree in clf.estimators_], axis=0)
+    indices = np.argsort(importances)[::-1]
+
+    # Print the feature ranking
+    print("Feature ranking:")
+
+    for f, j in zip(range(36), train_all.count().keys()):
+        print("%d. %s (%d) (%f)" % (f + 1, j,indices[f] + 1, importances[indices[f]]))
+        
+     
     # print ac(test_y, prediction)
 
 def main():
